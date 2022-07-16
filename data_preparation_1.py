@@ -132,10 +132,21 @@ def df_preparation(df):
 
     df2['fourier_1'] = df2['data'].apply(fourier_index)
     df2['fourier_2'] = df2['data_2'].apply(fourier_index)
-    df2['fourier_1'] = df2['fourier_1'].apply(lambda x: np.pad(x, (0, 17-len(x)), 'constant'))
-    df2['fourier_2'] = df2['fourier_2'].apply(lambda x: np.pad(x, (0, 22-len(x)), 'constant'))
+    l1 = []
+    l2 = []
+
+    for v in df2['fourier_1'].values:
+        l1.append(len(v))
+        
+    for v in df2['fourier_2'].values:
+        l1.append(len(v))
+        
+    df2['fourier_1'] = df2['fourier_1'].apply(lambda x: np.pad(x, (0, max(l1)-len(x)), 'constant'))
+    df2['fourier_2'] = df2['fourier_2'].apply(lambda x: np.pad(x, (0, max(l2)-len(x)), 'constant'))
+
     names1 = [f'f{i}' for i in range(17)]
     names2 = [f'ff{i}' for i in range(22)]
+
     df2[names1] = pd.DataFrame(df2['fourier_1'].tolist(), index=df2.index)
     df2[names2] = pd.DataFrame(df2['fourier_2'].tolist(), index=df2.index)
 
@@ -148,6 +159,6 @@ def df_preparation(df):
             'span_2', 'trend_2'
         ], errors='ignore').reset_index(drop=True)
 
-    train.drop(columns=['corr', 'euc'], errors='ignore', inplace=True)
+    #train.drop(columns=['corr', 'euc'], errors='ignore', inplace=True)
 
     return train
