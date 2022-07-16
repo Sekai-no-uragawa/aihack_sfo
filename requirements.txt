@@ -12,6 +12,7 @@ tqdm>=4.41.0
 protobuf<=3.20.1  # https://github.com/ultralytics/yolov5/issues/8012
 streamlit_lottie>=0.0.3
 plotly
+openpyxl
 # Logging -------------------------------------
 tensorboard>=2.4.1
 # wandb
