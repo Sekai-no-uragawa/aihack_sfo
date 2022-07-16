@@ -15,7 +15,7 @@ plotly
 openpyxl
 statsmodels
 sklearn
-pickle
+pickle-mixin
 # Logging -------------------------------------
 tensorboard>=2.4.1
 # wandb
