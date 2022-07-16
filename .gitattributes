@@ -1,0 +1,2 @@
+models/KNN_model.pkl filter=lfs diff=lfs merge=lfs -text
+models/RFC_models.pkl filter=lfs diff=lfs merge=lfs -text
