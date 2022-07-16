@@ -5,6 +5,8 @@ import urllib
 import pandas as pd
 import plotly.express as px
 import ast
+from data_preparation_1 import df_preparation
+from data_preparation_2 import pipeline
 
 
 @st.experimental_memo
@@ -72,6 +74,13 @@ def main_page():
                     fig, fig1 = plot_upload_data(df, d)
                     st.plotly_chart(fig, use_container_width=True)
                     st.plotly_chart(fig1, use_container_width=True)
+
+                df2 = df.copy()
+                df_prep_1 = df_preparation(df)
+                df_prep_1
+
+                df_prep_2 = pipeline(df2)
+                df_prep_2
 
                 st.write(f'Уровень стресса для строки №{d}: {np.random.randint(0,3)}')
 

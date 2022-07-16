@@ -63,7 +63,7 @@ def fourier_index(x):
     return yf[indices]
 
 
-def df_preparation(df):
+def df_preparation(df: pd.DataFrame):
     df.rename(columns={'Filename': 'id', 
         'Test_index': 'q_group',
         'Presentation': 'q_nrepeat',
@@ -139,19 +139,19 @@ def df_preparation(df):
         l1.append(len(v))
         
     for v in df2['fourier_2'].values:
-        l1.append(len(v))
+        l2.append(len(v))
         
     df2['fourier_1'] = df2['fourier_1'].apply(lambda x: np.pad(x, (0, max(l1)-len(x)), 'constant'))
     df2['fourier_2'] = df2['fourier_2'].apply(lambda x: np.pad(x, (0, max(l2)-len(x)), 'constant'))
 
-    names1 = [f'f{i}' for i in range(17)]
-    names2 = [f'ff{i}' for i in range(22)]
+    names1 = [f'f{i}' for i in range(max(l1))]
+    names2 = [f'ff{i}' for i in range(max(l2))]
 
     df2[names1] = pd.DataFrame(df2['fourier_1'].tolist(), index=df2.index)
     df2[names2] = pd.DataFrame(df2['fourier_2'].tolist(), index=df2.index)
 
     df2.fillna(0, inplace=True)
-    
+
     train = df2.drop(
         columns=[
             'id', 'q_group', 'q_nrepeat',
