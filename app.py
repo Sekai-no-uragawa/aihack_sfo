@@ -7,9 +7,10 @@ import plotly.express as px
 import ast
 from data_preparation_1 import df_preparation
 from data_preparation_2 import pipeline
+import pickle
 
 
-@st.experimental_memo
+#@st.experimental_memo
 def load_file(uploaded_file):
     try:
         df=pd.read_csv(uploaded_file, error_bad_lines=True, warn_bad_lines=False)
@@ -20,6 +21,17 @@ def load_file(uploaded_file):
         #    df=pd.DataFrame()
             
     return df
+
+
+@st.experimental_memo
+def load_model_knn():
+    url = 'https://github.com/Sekai-no-uragawa/aihack_sfo/raw/master/models/KNN_model.pkl'
+    filename = url.split('/')[-1]
+    urllib.request.urlretrieve(url, filename)
+    with open(filename, 'rb') as f:
+        model = pickle.load(f)
+    return model
+
 
 def plot_upload_data(df, n):
     data = ast.literal_eval(df.Data[n])
@@ -81,6 +93,11 @@ def main_page():
 
                 df_prep_2 = pipeline(df2)
                 df_prep_2
+
+                model_knn = load_model_knn()
+                
+                pred_knn = model_knn.predict(df_prep_2)
+                pred_knn
 
                 st.write(f'Уровень стресса для строки №{d}: {np.random.randint(0,3)}')
 
