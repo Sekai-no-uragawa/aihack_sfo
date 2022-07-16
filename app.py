@@ -59,8 +59,7 @@ def main_page():
     if is_upload:
         options = st.multiselect(
         'Выбери номера строк для анализа',
-        df.index.tolist(),
-        [1])
+        df.index.tolist())
 
         st.write('You selected:', options)
 
