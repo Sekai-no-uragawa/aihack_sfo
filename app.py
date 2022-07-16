@@ -12,10 +12,10 @@ def load_file(uploaded_file):
     try:
         df=pd.read_csv(uploaded_file, error_bad_lines=True, warn_bad_lines=False)
     except:
-        try:
+        #try:
             df = pd.read_excel(uploaded_file)
-        except:      
-            df=pd.DataFrame()
+        #except:      
+        #    df=pd.DataFrame()
             
     return df
 
