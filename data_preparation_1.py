@@ -150,6 +150,8 @@ def df_preparation(df):
     df2[names1] = pd.DataFrame(df2['fourier_1'].tolist(), index=df2.index)
     df2[names2] = pd.DataFrame(df2['fourier_2'].tolist(), index=df2.index)
 
+    df2.fillna(0, inplace=True)
+    
     train = df2.drop(
         columns=[
             'id', 'q_group', 'q_nrepeat',
