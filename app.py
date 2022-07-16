@@ -47,6 +47,8 @@ def plot_upload_data(df, n):
 
 
 def main_page():
+    st.title('Классификация уровня стресса человека по датчику плетизмограммы')
+    st.subheader('По зарегистрированным при помощи датчиков полиграфа (пьезо и фото плетизмограмма) реакции на вопрос определяется уровень стресса человека.')
     uploaded_file = st.file_uploader('Choose a file')
     is_upload = False
     if uploaded_file is not None:
@@ -61,8 +63,6 @@ def main_page():
         options = st.multiselect(
         'Выбери номера строк для анализа',
         df.index.tolist())
-
-        st.write('You selected:', options)
 
 
         start = st.button('PRESS')
@@ -83,12 +83,12 @@ def sidebar():
         "Страница Пользователя": main_page,
     }
 
-    selected_page = st.sidebar.selectbox("Выбрать страницу", page_names_to_funcs.keys())
-    page_names_to_funcs[selected_page]()
+    #selected_page = st.sidebar.selectbox("Выбрать страницу", page_names_to_funcs.keys())
+    #page_names_to_funcs[selected_page]()
 
     st.sidebar.markdown(
         '''
-        Автоматическая детекция уровня стресса по данным с датчиков
+        Web-сервис, основанный на алгоритмах машинного обучения. Данный сервис позволяет определить уровень стресса при реакции на стимул в виде вопроса.
 
         \n
         ___
@@ -110,3 +110,4 @@ if __name__ == '__main__':
     #    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html = True)
     
     sidebar()
+    main_page()
