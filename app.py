@@ -7,7 +7,7 @@ import plotly.express as px
 import ast
 
 
-@st.experimental_memo
+#@st.experimental_memo
 def load_file(uploaded_file):
     try:
         df=pd.read_csv(uploaded_file, error_bad_lines=True, warn_bad_lines=False)
