@@ -14,8 +14,10 @@ def load_file(uploaded_file):
     except:
         try:
             df = pd.read_excel(uploaded_file)
-        except:      
+        except Exception:
+            st.write(Exception)
             df=pd.DataFrame()
+
     return df
 
 def plot_upload_data(df, n):
