@@ -92,14 +92,14 @@ def main_page():
                 df_prep_1
 
                 df_prep_2 = pipeline(df2)
-                df_prep_2
+                df_prep_2.shape
 
                 model_knn = load_model_knn()
                 
                 pred_knn = model_knn.predict(df_prep_2)
-                pred_knn
+                
 
-                st.write(f'Уровень стресса для строки №{d}: {np.random.randint(0,3)}')
+                st.write(f'Уровень стресса для строки №{d}: {pred_knn[d]}')
 
 
 
