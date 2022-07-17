@@ -154,7 +154,7 @@ def df_preparation(df: pd.DataFrame):
 
     train = df2.drop(
         columns=[
-            'id', 'q_group', 'q_nrepeat',
+            'id', 'q_group',
             'question', 'data', 'data_2',
             'fourier_1', 'fourier_2', 'rr_1',
             'span_1', 'trend_1', 'rr_2',
