@@ -109,19 +109,19 @@ def main_page():
                 df_prep_1
 
                 df_prep_2 = pipeline(df2)
-                df_prep_2.shape
+                df_prep_2
 
                 model_knn = load_model_knn()
                 model_rfc = load_model_rfc()
                 model_kn2 = load_model_knn2()
                 #pred_knn = model_knn.predict(df_prep_2)
                 #pred_knn
-                pred_rfc = model_rfc.predict(df_prep_2)
-                pred_rfc
+                #pred_rfc = model_rfc.predict(df_prep_2)
+                #pred_rfc
                 pred_knn2 = model_kn2.predict(df_prep_1)
                 pred_knn2
 
-                st.write(f'Уровень стресса для строки №{d}: {pred_knn[d]}')
+                st.write(f'Уровень стресса для строки №{d}: {pred_knn2[d]}')
 
 
 
