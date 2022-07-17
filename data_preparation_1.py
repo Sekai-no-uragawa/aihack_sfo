@@ -159,7 +159,7 @@ def df_preparation(df: pd.DataFrame):
             'fourier_1', 'fourier_2', 'rr_1',
             'span_1', 'trend_1', 'rr_2',
             'span_2', 'trend_2'
-        ], errors='ignore').reset_index(drop=True)
+        ]+names1+names2, errors='ignore').reset_index(drop=True)
 
     #train.drop(columns=['corr', 'euc'], errors='ignore', inplace=True)
 
