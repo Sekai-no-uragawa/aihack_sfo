@@ -118,7 +118,7 @@ def main_page():
                 #pred_knn
                 #pred_rfc = model_rfc.predict(df_prep_2)
                 #pred_rfc
-                pred_knn2 = model_kn2.predict(df_prep_1)
+                pred_knn2 = model_kn2.predict(df_prep_1.drop(['label'], axis=1))
                 pred_knn2
 
                 st.write(f'Уровень стресса для строки №{d}: {pred_knn2[d]}')
