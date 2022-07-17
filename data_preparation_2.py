@@ -126,41 +126,12 @@ def pipeline(df: pd.DataFrame) -> pd.DataFrame:
     df['t1_mean'] = df['trend_1'].apply(lambda x: np.mean(x))
     df['t2_mean'] = df['trend_2'].apply(lambda x: np.mean(x))
 
-    df['fourier1'] = df['Data'].apply(lambda x: fourierindex(x) )
-    df['fourier2'] = df['Data_2'].apply(lambda x: fourierindex(x))
-
-    max_fourier1 = 0
-    for i in df.fourier1:
-        if len(i)>max_fourier1:
-            max_fourier1 = len(i)
-
-    max_fourier2 = 0
-    for i in df.fourier2:
-        if len(i)>max_fourier2:
-            max_fourier2 = len(i)
-
-    df['fourier1'] = df['fourier1'].apply(lambda x: np.pad(x, (0, max_fourier1-len(x)), 'constant'))
-    df['fourier2'] = df['fourier2'].apply(lambda x: np.pad(x, (0, max_fourier2-len(x)), 'constant'))
-
-    fourier_names1 = [f'f{i}' for i in range(len(df['fourier1'][0]))]
-    fourier_names2 = [f'ff{i}' for i in range(len(df['fourier2'][0]))]
-
-    df[fourier_names1] = pd.DataFrame(df.fourier1.tolist(), index= df.index)
-    df[fourier_names2] = pd.DataFrame(df.fourier2.tolist(), index= df.index)
-
     temp = pd.DataFrame()
     t_names1 = [f't{i}' for i in range(len(df['trend_1'][0]))]
     t_names2 = [f'tt{i}' for i in range(len(df['trend_2'][0]))]
     temp[t_names1] = pd.DataFrame(df.trend_1.tolist(), index= df.index)
     temp[t_names2] = pd.DataFrame(df.trend_2.tolist(), index= df.index)
 
-    cols_diff = [str(i+'df_t') for i in t_names1+t_names2]
-    difference1 = temp[t_names1].apply(pd.Series.pct_change)
-    difference1 = difference1.apply(lambda x: x.fillna(x.median(), axis = 0))
-    difference2 = temp[t_names2].apply(pd.Series.pct_change)
-    difference2 = difference2.apply(lambda x: x.fillna(x.median(), axis = 0))
-    difference = pd.concat([difference1, difference2], axis = 1)
-    difference.columns = cols_diff
 
     diff_trend1 = df[names1 + ['t1_mean'] ].apply(lambda x: x  - x['t1_mean'], axis = 1)
     diff_trend1 = diff_trend1.drop(columns = ['t1_mean'])
