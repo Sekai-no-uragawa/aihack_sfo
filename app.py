@@ -32,6 +32,23 @@ def load_model_knn():
         model = pickle.load(f)
     return model
 
+@st.experimental_memo
+def load_model_rfc():
+    url = 'https://github.com/Sekai-no-uragawa/aihack_sfo/raw/master/models/RFC_model.pkl'
+    filename = url.split('/')[-1]
+    urllib.request.urlretrieve(url, filename)
+    with open(filename, 'rb') as f:
+        model = pickle.load(f)
+    return model
+
+@st.experimental_memo
+def load_model_knn2():
+    url = 'https://github.com/Sekai-no-uragawa/aihack_sfo/raw/master/models/2_KNN_model.pkl'
+    filename = url.split('/')[-1]
+    urllib.request.urlretrieve(url, filename)
+    with open(filename, 'rb') as f:
+        model = pickle.load(f)
+    return model
 
 def plot_upload_data(df, n):
     data = ast.literal_eval(df.Data[n])
@@ -95,9 +112,14 @@ def main_page():
                 df_prep_2.shape
 
                 model_knn = load_model_knn()
-                
+                model_rfc = load_model_rfc()
+                model_kn2 = load_model_knn2()
                 pred_knn = model_knn.predict(df_prep_2)
-                
+                pred_knn
+                pred_rfc = model_rfc.predict(df_prep_2)
+                pred_rfc
+                pred_knn2 = model_kn2.predict(df_prep_1)
+                pred_knn2
 
                 st.write(f'Уровень стресса для строки №{d}: {pred_knn[d]}')
 
